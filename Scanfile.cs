@@ -5,17 +5,23 @@ class Program
 {
     static void Main(string[] args)
     {
+        if (args.Length < 3)
+        {
+            Console.WriteLine("Usage: ScanFile.exe <tmfs_path> <region> <filename>");
+            return;
+        }
+
         // Path to the Trend Micro AmaaS CLI (tmfs)
-        string tmfsPath = "path_to_tmfs_executable"; // Replace with actual path
+        string tmfsPath = args[0];
 
         // Region for the command
-        string region = "your_region"; // Replace with actual region
+        string region = args[1];
 
         // Filename to scan (provide the filename)
-        string filename = "your_filename"; // Replace with actual filename
+        string filename = args[2];
 
         // Construct the command
-        string command = $"tmfs scan --region {region} file:{filename}";
+        string command = $"scan --region {region} file:{filename}";
 
         // Create process start info
         ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -54,8 +60,5 @@ class Program
 
         Console.WriteLine("Error:");
         Console.WriteLine(error);
-
-        Console.WriteLine("Press any key to exit.");
-        Console.ReadKey();
     }
 }
